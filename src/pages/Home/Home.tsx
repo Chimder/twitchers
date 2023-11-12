@@ -72,12 +72,6 @@ export function Home() {
         />
 
         <h1>Twitch Stream</h1>
-        <iframe
-          src='https://player.twitch.tv/?v1972835952'
-          height='1000'
-          width='1000'
-          allowfullscreen
-        ></iframe>
       </div>
     </>
   );
