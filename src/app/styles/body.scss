@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+  // font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  background: var(--c-background);
+
+  transition: ease 0.2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
