@@ -2,10 +2,10 @@
   "compilerOptions": {
     "allowJs": true,
     "jsx": "react-jsx",
-    "target": "ES2020",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
-    "moduleResolution": "node",
-    "module": "commonjs",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "moduleResolution": "Node",
+    "module": "ESNext",
     "declaration": false,
     "noLib": false,
     "emitDecoratorMetadata": true,
@@ -20,16 +20,19 @@
     "noImplicitReturns": false,
     "noImplicitUseStrict": false,
     "outDir": "dist/",
-    "baseUrl": "src/",
+    // "baseUrl": ".",
+    // "paths": {
+    //   "~app": ["src/*"],
+    //   "~app/*": ["./app/*"]
+    "baseUrl": "./src",
     "paths": {
-      "~app": ["./app"],
-      "~app/*": ["./app/*"]
+      "@/*": ["*"]
     },
     "listFiles": false,
     "noEmitHelpers": true
   },
   "include": ["src", "**/*.tsx", "src/@types", "**/*.ts"],
   "exclude": ["node_modules", "build", "scripts"],
-  "compileOnSave": false,
+  // "compileOnSave": false,
   "references": [{ "path": "./tsconfig.node.json" }]
 }

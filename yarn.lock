@@ -1151,6 +1151,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "clsx@npm:2.0.0"
+  checksum: c09f43b3144a0b7826b6b11b6a111b2c7440831004eecc02d333533c5e58ef0aa5f2dce071d3b25fbb8c8ea97b45df96c74bcc1d51c8c2027eb981931107b0cd
+  languageName: node
+  linkType: hard
+
 "color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
@@ -3393,6 +3400,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.11.0":
+  version: 4.11.0
+  resolution: "react-icons@npm:4.11.0"
+  peerDependencies:
+    react: "*"
+  checksum: 95e837e11ece80cc39ef1beac026d10f96cd7e567afc718e717517beb35b82dd59307a758c10b3a449dc15d6682d6551ecc630b2821d9365819af921fa279a73
+  languageName: node
+  linkType: hard
+
 "react-router-dom@npm:^6.18.0":
   version: 6.18.0
   resolution: "react-router-dom@npm:6.18.0"
@@ -4159,12 +4175,14 @@ __metadata:
     "@typescript-eslint/parser": "npm:^6.0.0"
     "@vitejs/plugin-react-swc": "npm:^3.3.2"
     axios: "npm:^1.6.1"
+    clsx: "npm:^2.0.0"
     eslint: "npm:^8.45.0"
     eslint-plugin-import: "npm:^2.29.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.3"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    react-icons: "npm:^4.11.0"
     react-router-dom: "npm:^6.18.0"
     sass: "npm:^1.69.5"
     sass-loader: "npm:^13.3.2"

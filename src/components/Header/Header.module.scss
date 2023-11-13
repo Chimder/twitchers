@@ -1,0 +1,52 @@
+.header {
+  padding: 0 50px;
+  background: var(--h-primary);
+  display: flex;
+  width: 100%;
+  height: 100px;
+min-height: 70px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  img {
+    padding-right: 40px;
+  }
+}
+
+.header_word {
+  display: flex;
+  letter-spacing: 1.4px;
+  line-height: 1.5;
+  font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  padding-right: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  padding-right: 20px;
+  position: relative;
+  svg {
+    position: absolute;
+    top: -2px;
+    right: -16px;
+    width: 28px;
+    height: 28px;
+    fill: var(--h-secondary);
+  }
+}
+
+.sing_in {
+  padding: 0;
+}

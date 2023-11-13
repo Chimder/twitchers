@@ -1,8 +1,9 @@
 :root {
-  --c-primary: #3399ff;
+  --c-primary: #ff9f59;
   --c-primary--hover: #76ade4;
   --c-primary--active: #2364a5;
   --c-danger: #9b7a78;
+  --input-primary: #000000;
   --c-secondary: #9b7a78;
   --c-secondary--hover: #9b7a78;
 
@@ -15,11 +16,12 @@
   --c-gray--400: #b9c6da;
   --c-gray--300: #c8d2e3;
   --c-gray--200: #e4e7ec;
-//
+  //
   --c-gray--100: #eeeeee;
   --c-foreground: #e5e5e5;
-
-
+  // header
+  --h-primary: #ff9f59;
+  --h-secondary: rgb(0, 255, 255);
   /* text */
   --c-text: #f1f1f1;
   --c-text-2: #222222;
@@ -28,6 +30,5 @@
   --f-primary: "Roboto", sans-serif;
   --f-secondary: "Roboto Mono", monospace;
 
-/* responsive*/
-
+  /* responsive*/
 }

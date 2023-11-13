@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import axios, { AxiosResponse } from "axios";
 import {
   AccessTokenResponse,
@@ -8,15 +9,18 @@ import {
   SearchCategoriesResponse,
   SearchChannelsResponse,
   User,
-  Video,
 } from "./types";
 
-const clientId = "s8sb9ppib5k1rvmrhae8twgnoyttbv";
+const clientId = import.meta.env.VITE_CLIENT_ID;
+let accessToken: string | null = null;
+let tokenExpirationTime: number | null = null;
 
 export async function getAccessToken(): Promise<string> {
+  if (accessToken && tokenExpirationTime && Date.now() < tokenExpirationTime) {
+    return accessToken;
+  }
   try {
-    const clientSecret = "p00lacywj1iqv9q3fu9amito3ueu4z";
-
+    const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
     const response: AxiosResponse<AccessTokenResponse> = await axios.post(
       "https://id.twitch.tv/oauth2/token",
       null,
@@ -29,7 +33,10 @@ export async function getAccessToken(): Promise<string> {
       }
     );
 
-    return response.data.access_token;
+    accessToken = response.data.access_token;
+    tokenExpirationTime = Date.now() + 30 * 60 * 1000;
+
+    return accessToken;
   } catch (error) {
     console.error(
       "Ошибка при получении токена доступа:",
