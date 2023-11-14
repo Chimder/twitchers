@@ -1,10 +1,37 @@
 import React from "react";
 import s from "./Home.module.scss";
+import { useQuery } from "@tanstack/react-query";
+import { getAccessToken, searchChannels } from "@/shared/api/axios";
+import { GoDotFill } from "react-icons/go";
+import { FaTwitch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
+  const [searchQuery, setSearchQuery] = React.useState<string>("");
+
+  const { data: accessToken } = useQuery<string>({
+    queryKey: ["accessToken"],
+    queryFn: async () => getAccessToken(),
+  });
+
+  const { data: searchResults, refetch } = useQuery({
+    queryKey: ["searchResults"],
+    queryFn: async () => searchChannels(accessToken, searchQuery),
+    enabled: !!searchQuery,
+  });
+
+  React.useEffect(() => {
+    if (searchQuery) {
+      refetch();
+    }
+  }, [searchQuery, refetch]);
+
   return (
     <article className={s.home_container}>
-      <div className={s.figure}></div>
+      {/* <div className={s.figure}></div> */}
+      {/* <div className={s.figure2}></div> */}
+      <div className={s.figure3}></div>
+      <div className={s.figure4}></div>
       <header className={s.home_header}>
         <div className={s.main_h1}>
           <h1>
@@ -18,10 +45,32 @@ export const Home = () => {
           </p>
         </div>
         <div className={s.input_container}>
-          <input type='text'  />
+          <input
+            type='text'
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
       </header>
-      <div className={s.search}></div>
+      <div className={s.search_container}>
+        {searchQuery && (
+          <div className={s.search}>
+            {searchResults?.map((channel) => (
+              <Link
+                to={`streamer/${channel.id}`}
+                className={s.channel}
+                key={channel.id}
+              >
+                <div className={s.channel_info}>
+                  <img src={channel.thumbnail_url} alt='' />
+                  <span>{channel.display_name}</span>
+                  {channel.is_live && <GoDotFill />}
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </article>
   );
 };

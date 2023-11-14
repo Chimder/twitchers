@@ -9,6 +9,7 @@ import {
   SearchCategoriesResponse,
   SearchChannelsResponse,
   User,
+  Video,
 } from "./types";
 
 const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -34,7 +35,9 @@ export async function getAccessToken(): Promise<string> {
     );
 
     accessToken = response.data.access_token;
-    tokenExpirationTime = Date.now() + 30 * 60 * 1000;
+    tokenExpirationTime = Date.now() + response.data.expires_in * 1000;
+    console.log(response.data, "token");
+    console.log(tokenExpirationTime, "Toitressfs");
 
     return accessToken;
   } catch (error) {
@@ -56,6 +59,7 @@ export async function searchChannels(
       {
         params: {
           query: searchQuery,
+          first: 5,
         },
         headers: {
           "Client-ID": clientId,
@@ -74,82 +78,37 @@ export async function searchChannels(
   }
 }
 
-export async function searchCategories(
-  accessToken: string,
-  searchQuery: string
-): Promise<SearchCategoriesResponse> {
-  try {
-    const response: AxiosResponse<{ data: Category[] }> = await axios.get(
-      "https://api.twitch.tv/helix/search/categories",
-      {
-        params: {
-          query: searchQuery,
-        },
-        headers: {
-          "Client-ID": clientId,
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    return { categories: response.data.data };
-  } catch (error) {
-    console.error(
-      "Ошибка при выполнении запроса к Twitch API:",
-      error.response?.data || error.message
-    );
-    throw error;
-  }
-}
-
-export async function getUserById(
+export async function getUserAndVideosById(
   accessToken: string,
   userId: string
-): Promise<GetUserByIdResponse> {
+): Promise<{ user: User; videos: Video[] }> {
   try {
-    const response: AxiosResponse<{ data: User[] }> = await axios.get(
-      "https://api.twitch.tv/helix/users",
-      {
-        params: {
-          id: userId,
-        },
-        headers: {
-          "Client-ID": clientId,
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    return { user: response.data.data[0] };
-  } catch (error) {
-    console.error(
-      "Ошибка при выполнении запроса к Twitch API:",
-      error.response?.data || error.message
-    );
-    throw error;
-  }
-}
-
-export async function getVideosByUserId(
-  accessToken: string
-): Promise<GetVideosResponse> {
-  try {
-    const response = await axios.get("https://api.twitch.tv/helix/videos", {
+    const userResponse = await axios.get("https://api.twitch.tv/helix/users", {
       params: {
-        user_id: "86277097",
+        id: userId,
       },
       headers: {
         "Client-ID": clientId,
         Authorization: `Bearer ${accessToken}`,
       },
     });
-
-    return response.data.data;
-  } catch (error) {
-    console.error(
-      "Ошибка при выполнении запроса к Twitch API:",
-      error.response?.data || error.message
+    const videosResponse = await axios.get(
+      "https://api.twitch.tv/helix/videos",
+      {
+        params: {
+          user_id: userId,
+        },
+        headers: {
+          "Client-ID": clientId,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     );
-    throw error;
+    const user = userResponse.data.data[0];
+    const videos = videosResponse.data.data;
+
+    return { user, videos };
+  } catch (error) {
+    console.error(error);
   }
 }

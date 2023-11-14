@@ -1,15 +1,16 @@
 .home_container {
+  // overflow-y: hidden;
 }
 
 .home_header {
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: end;
   padding: 0 200px;
   align-items: center;
-  height: 600px;
+  height: 480px;
   background: var(--c-primary);
-
 }
 
 .main_h1 {
@@ -21,7 +22,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    font-size: 8.4rem;
+    font-size: 7.4rem;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.0415625em;
@@ -40,13 +41,13 @@
 }
 
 .input_container {
+  display: flex;
   input {
     display: flex;
     min-width: 480px;
     color: var(--h-secondary);
     background: var(--input-primary);
     border: 1px solid var(--h-secondary);
-    border-radius: 10px;
     justify-content: center;
     text-align: center;
     height: 40px;
@@ -65,18 +66,143 @@
   &::before {
     content: "";
     left: 0;
-    bottom: -700px;
+    bottom: -10px;
     position: absolute;
-    filter: blur(45px);
+    filter: blur(55px);
     transform: translateZ(0);
     background: linear-gradient(
-      to bottom right,
-      rgba(8, 8, 243, 0),
-      rgba(2, 22, 80, 0),
+      to bottom left,
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0),
       rgba(219, 10, 10, 0.329)
     );
     border-radius: 90%;
     width: 480px;
     height: 360px;
+  }
+  &::after {
+    content: "";
+    right: -200px;
+    bottom: 10px;
+    position: absolute;
+    filter: blur(45px);
+    transform: translateZ(0);
+    background: radial-gradient(rgba(1, 247, 255, 0.4), rgba(249, 250, 250, 0));
+    width: 340px;
+    height: 240px;
+    z-index: -1;
+  }
+}
+
+.figure2 {
+  &::before {
+    content: "";
+    left: -100px;
+    top: 100px;
+    position: absolute;
+    filter: blur(15px);
+    transform: translateZ(0);
+    background: radial-gradient(
+      // to bottom right,
+      // rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0),
+      rgba(170, 155, 24, 0.329)
+    );
+    border-radius: 90%;
+    width: 480px;
+    height: 360px;
+  }
+  &::after {
+    content: "";
+    right: -200px;
+    bottom: 10px;
+    position: absolute;
+    filter: blur(45px);
+    transform: translateZ(0);
+    background: radial-gradient(rgba(1, 247, 255, 0.4), rgba(249, 250, 250, 0));
+    width: 340px;
+    height: 240px;
+    z-index: -1;
+  }
+}
+
+.figure3 {
+  -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 0.8), transparent 70%);
+  opacity: 0.85;
+  background-image: linear-gradient(260.93deg, #fa683c 0%, #978a13 100%);
+  border-radius: 9999px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  width: max(25vw, 100px);
+  position: absolute;
+  height: 400px;
+  bottom: -100px;
+  left: -200px;
+  z-index: -30;
+}
+
+.figure4 {
+  -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 0.8), transparent 70%);
+  opacity: 0.95;
+  background-image: linear-gradient(266.93deg, #02fdf1 10%, #7ab9b4 90%);
+  border-radius: 9999px;
+  // --tw-translate-x: 30%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  width: max(48vw, 100px);
+  height: 500px;
+  position: absolute;
+  height: 400px;
+  bottom: -200px;
+  right: -400px;
+  z-index: -30;
+}
+
+.search_container {
+  display: flex;
+  justify-content: center;
+  color: var(--h-secondary);
+}
+.search {
+  width: 476px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.channel {
+  list-style: none;
+  color: var(--h-secondary);
+  text-decoration: none;
+  position: relative;
+  display: flex;
+  align-items: start;
+  padding-top: 12px;
+  img {
+    width: 50px;
+    border-radius: 99px;
+  }
+  svg {
+    position: relative;
+    top: -19px;
+    left: 4px;
+    fill: var(--c-primary);
+    animation: blink 1.8s infinite;
+  }
+  span {
+    padding-left: 20px;
+    top: -20px;
+    position: relative;
   }
 }

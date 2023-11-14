@@ -7,11 +7,11 @@ body {
   // background: var(--c-background);
   max-width: 100vw;
   max-height: 100vw;
+  overflow-x: hidden;
 
+  // overflow-y: hidden;
+  background: linear-gradient(to bottom, transparent, rgb(0, 0, 0)) rgb(0, 0, 0);
   transition: ease 0.2s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  // color: rgb(var(--c-text));
-  background: linear-gradient(to bottom, transparent, rgb(0, 0, 0)) rgb(0, 0, 0);
 }

@@ -12,7 +12,7 @@ export const App = () => {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />}></Route>
-          <Route path='streamer/:name' element={<Streamer />}></Route>
+          <Route path='streamer/:id' element={<Streamer />}></Route>
         </Route>
       </Routes>
     </>

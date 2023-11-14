@@ -3,11 +3,15 @@ export interface SearchChannelsResponse {
 }
 export interface AccessTokenResponse {
   access_token: string;
+  expires_in?: number;
 }
 
 export interface Channel {
   id: string;
   display_name: string;
+  thumbnail_url: string;
+  broadcaster_language: string;
+  is_live: boolean;
 }
 
 export interface Category {
@@ -18,6 +22,14 @@ export interface Category {
 export interface User {
   id: string;
   display_name: string;
+  broadcaster_type: string;
+  created_at: string;
+  description: string;
+  login: string;
+  offline_image_url: string;
+  profile_image_url: string;
+  type: string;
+  view_count: string;
 }
 
 export interface SearchChannelsResponse {
@@ -40,9 +52,19 @@ export interface GetUserByIdResponse {
 export interface Video {
   id: string;
   title: string;
-  // Добавьте другие поля, если они вам нужны
-}
-
-export interface GetVideosResponse {
-  videos: Video[];
+  created_at: string;
+  description: string;
+  duration: string;
+  language: string;
+  muted_segments: string;
+  published_at: string;
+  stream_id: string;
+  thumbnail_url: string;
+  type: string;
+  url: string;
+  user_id: string;
+  user_login: string;
+  user_name: string;
+  view_count: string;
+  viewable: string;
 }

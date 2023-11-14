@@ -6,7 +6,7 @@ export const Layout = () => {
     <>
       <Header />
       <Outlet></Outlet>
-      <footer>FOOTER</footer>
+      {/* <footer>FOOTER</footer> */}
     </>
   );
 };
