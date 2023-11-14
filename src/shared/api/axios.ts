@@ -2,11 +2,7 @@
 import axios, { AxiosResponse } from "axios";
 import {
   AccessTokenResponse,
-  Category,
   Channel,
-  GetUserByIdResponse,
-  GetVideosResponse,
-  SearchCategoriesResponse,
   SearchChannelsResponse,
   User,
   Video,

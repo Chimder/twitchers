@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
-import { getAccessToken, getUserAndVideosById } from "@/shared/api/axios";
-import s from "./Streamer.module.scss";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { Link, useParams } from "react-router-dom";
+import s from "./Streamer.module.scss";
+import { getAccessToken, getUserAndVideosById } from "@/shared/api/axios";
 
 export const Streamer = () => {
   const { id } = useParams();
