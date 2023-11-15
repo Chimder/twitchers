@@ -98,6 +98,7 @@
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: flex-start;
+  max-width: 1200px;
 }
 
 .vod_img {
@@ -125,7 +126,7 @@
 }
 
 .vod_info {
-  padding: 0.5rem 1.25rem;
+  padding: 0.5rem 1rem;
   justify-content: space-between;
   flex-direction: column;
   width: 100%;

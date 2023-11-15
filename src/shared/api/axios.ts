@@ -32,6 +32,7 @@ export async function getAccessToken(): Promise<string> {
 
     accessToken = response.data.access_token;
     tokenExpirationTime = Date.now() + response.data.expires_in * 1000;
+
     console.log(response.data, "token");
     console.log(tokenExpirationTime, "Toitressfs");
 
@@ -45,10 +46,8 @@ export async function getAccessToken(): Promise<string> {
   }
 }
 
-export async function searchChannels(
-  accessToken: string,
-  searchQuery: string
-): Promise<Channel[]> {
+export async function searchChannels(searchQuery: string): Promise<Channel[]> {
+  const accessToken = await getAccessToken();
   try {
     const response: AxiosResponse<SearchChannelsResponse> = await axios.get(
       "https://api.twitch.tv/helix/search/channels",
@@ -75,9 +74,9 @@ export async function searchChannels(
 }
 
 export async function getUserAndVideosById(
-  accessToken: string,
   userId: string
 ): Promise<{ user: User; videos: Video[] }> {
+  const accessToken = await getAccessToken();
   try {
     const userResponse = await axios.get("https://api.twitch.tv/helix/users", {
       params: {
@@ -106,5 +105,31 @@ export async function getUserAndVideosById(
     return { user, videos };
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function getCurrentStreamByUserId(
+  userId: string
+): Promise<any | null> {
+  const accessToken = await getAccessToken();
+  try {
+    const response = await axios.get("https://api.twitch.tv/helix/streams", {
+      params: {
+        user_id: userId,
+      },
+      headers: {
+        "Client-ID": clientId,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const stream = response.data.data[0];
+    return stream || null;
+  } catch (error) {
+    console.error(
+      "Ошибка при выполнении запроса к Twitch API:",
+      error.response?.data || error.message
+    );
+    throw error;
   }
 }

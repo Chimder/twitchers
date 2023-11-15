@@ -3433,6 +3433,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-twitch-embed@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "react-twitch-embed@npm:3.0.1"
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 0b7e0a9e189f1be86165eae2ae1337154d28366a780a4809094891661907945ed0481bff72e7aa6b7d14deb203cf1ba630f5895e9c673963c0703ef552a60570
+  languageName: node
+  linkType: hard
+
 "react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
@@ -4184,6 +4194,7 @@ __metadata:
     react-dom: "npm:^18.2.0"
     react-icons: "npm:^4.11.0"
     react-router-dom: "npm:^6.18.0"
+    react-twitch-embed: "npm:^3.0.1"
     sass: "npm:^1.69.5"
     sass-loader: "npm:^13.3.2"
     stylelint: "npm:^15.11.0"

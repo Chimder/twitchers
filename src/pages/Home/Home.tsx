@@ -1,22 +1,16 @@
 import React from "react";
 import s from "./Home.module.scss";
 import { useQuery } from "@tanstack/react-query";
-import { getAccessToken, searchChannels } from "@/shared/api/axios";
+import { searchChannels } from "@/shared/api/axios";
 import { GoDotFill } from "react-icons/go";
-import { FaTwitch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [searchQuery, setSearchQuery] = React.useState<string>("");
 
-  const { data: accessToken } = useQuery<string>({
-    queryKey: ["accessToken"],
-    queryFn: async () => getAccessToken(),
-  });
-
   const { data: searchResults, refetch } = useQuery({
     queryKey: ["searchResults"],
-    queryFn: async () => searchChannels(accessToken, searchQuery),
+    queryFn: async () => searchChannels(searchQuery),
     enabled: !!searchQuery,
   });
 
