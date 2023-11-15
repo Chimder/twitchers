@@ -76,7 +76,7 @@ export const StreamerVideos = ({ ...user }: UserProps) => {
             <div className={s.close_button} onClick={() => closeModal()}></div>
             <iframe
               className={s.twitch_iframe}
-              src={`https://player.twitch.tv/?video=v${videoId}&parent=localhost&twitchers.vercel.app&autoplay=false`}
+              src={`https://player.twitch.tv/?video=v${videoId}&parent=localhost&parent=twitchers.vercel.app&autoplay=false`}
               width='1280'
               height='720'
               allowFullScreen
