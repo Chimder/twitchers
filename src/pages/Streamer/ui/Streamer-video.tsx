@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import s from "../Streamer.module.scss";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import s from "../Streamer.module.scss";
 import { User, Video } from "@/shared/api/types";
 
 interface UserProps {
@@ -10,17 +9,37 @@ interface UserProps {
 }
 
 export const StreamerVideos = ({ ...user }: UserProps) => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [videoId, setVideoId] = React.useState<number | null>();
+
+  const openModal = (id) => {
+    setVideoId(id);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setVideoId(null);
+    setIsModalOpen(false);
+  };
+  if (!user.videos || user.videos.length === 0) {
+    return <div>У пользователя нет видео.</div>;
+  }
+
   return (
     <section className={s.streamer_video}>
+      <div className={s.figure1}></div>
+      <div className={s.figure2}></div>
       <div className={s.video_grid}>
         {user.videos?.map((video) => (
-          <Link className={s.vod_container} to='#'>
+          <div
+            key={video.id}
+            onClick={() => openModal(video.id)}
+            className={s.vod_container}
+          >
             <span className={s.vod_img}>
               <img
                 src={video.thumbnail_url
                   .replace("%{width}", "320")
                   .replace("%{height}", "180")}
-                // decoding='async'
                 alt=''
               />
             </span>
@@ -48,10 +67,23 @@ export const StreamerVideos = ({ ...user }: UserProps) => {
                 </div>
               </div>
             </div>
-            {/* <div>{video.thumbnail_url}</div> */}
-          </Link>
+          </div>
         ))}
       </div>
+      {isModalOpen && (
+        <div className={s.modal_overlay}>
+          <div className={s.modal_content}>
+            <div className={s.close_button} onClick={() => closeModal()}></div>
+            <iframe
+              className={s.twitch_iframe}
+              src={`https://player.twitch.tv/?video=v${videoId}&parent=localhost&twitchers.vercel.app&autoplay=false`}
+              width='1280'
+              height='720'
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

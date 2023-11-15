@@ -1,11 +1,16 @@
 .home_container {
-  // overflow-y: hidden;
+  // overflow: hidden !important;
+  // height: 100vh;
+  // max-height: 100vh;
+    max-height: 100%;
+    overflow: hidden auto;
 }
 
 .home_header {
   display: flex;
   flex-flow: column;
   // justify-content: center;
+
   justify-content: end;
   padding: 0 200px;
   align-items: center;
@@ -129,7 +134,13 @@
 .figure3 {
   -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 0.8), transparent 70%);
   opacity: 0.85;
-  background-image: linear-gradient(260.93deg, #fa683c 0%, #978a13 100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 2%,
+    rgba(255, 129, 65, 1) 15%,
+    rgba(181, 58, 17, 1) 38%,
+    rgba(179, 40, 22, 1) 96%
+  );
   border-radius: 9999px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
@@ -151,12 +162,12 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  width: max(48vw, 100px);
-  height: 500px;
   position: absolute;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   bottom: -200px;
-  right: -400px;
+  top: 300px;
+  right: -300px;
   z-index: -30;
 }
 

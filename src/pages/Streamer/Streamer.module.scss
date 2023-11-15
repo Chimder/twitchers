@@ -101,6 +101,49 @@
   max-width: 1200px;
 }
 
+.figure1 {
+  -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 0.8), transparent 70%);
+  opacity: 0.85;
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 5%,
+    rgba(57, 68, 194, 1) 35%,
+    rgba(9, 11, 106, 1) 90%
+  );
+  border-radius: 9999px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  width: max(25vw, 100px);
+  position: absolute;
+  height: 400px;
+  bottom: -100px;
+  left: -200px;
+  z-index: -30;
+}
+
+.figure2 {
+  -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 0.8), transparent 70%);
+  opacity: 0.95;
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgb(24, 10, 10) 10%,
+    rgba(59, 17, 17, 1) 30%,
+    rgba(255, 0, 0, 1) 90%
+  );
+  width: 1200px;
+  height: 1200px;
+  position: absolute;
+  top: -260px;
+  right: -480px;
+  z-index: -9999;
+  border-radius: 9999px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .vod_img {
   box-sizing: border-box;
   display: block;
@@ -216,4 +259,116 @@
   font-size: 0.75rem;
   line-height: 1rem;
   text-align: start;
+}
+
+.streamer {
+  width: 100%;
+  padding: 40px 0 60px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.streamer_logo {
+  width: 25%;
+  display: flex;
+  flex-flow: column;
+  align-items: self-start;
+  div {
+    padding-top: 120px;
+    font-size: 3rem;
+  }
+  img {
+    border: 2px solid var(--c-secondary);
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.streamer_info {
+  display: flex;
+  width: 25%;
+}
+.streamer_info_container {
+  width: 100%;
+  align-items: center;
+  position: relative;
+  right: 80px;
+  top: 40px;
+  flex-flow: column;
+}
+
+.streamer_joined {
+  display: flex;
+  position: relative;
+  padding-bottom: 10px;
+  justify-content: space-between;
+}
+
+.streamer_description {
+  padding: 20px 0 30px 0;
+}
+
+.twitch_player {
+  width: 503px;
+  border: 2px solid var(--c-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 363px;
+  cursor: pointer;
+}
+.twitch_player2 {
+  width: 503px;
+  cursor: pointer;
+  border: 2px solid var(--c-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 363px;
+  z-index: -1;
+}
+
+.modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1500px;
+  height: 800px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  position: relative;
+}
+
+.close_button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--c-secondary);
+  cursor: pointer;
+  &::before {
+    content: "✕";
+    font-size: 28px;
+  }
+}
+
+.twitch_iframe {
+  border: 1px solid var(--c-primary);
+}
+
+.twitch_offline {
+  width: 100px;
+  height: 100px;
 }
