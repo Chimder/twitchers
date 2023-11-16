@@ -1,8 +1,8 @@
-import React from "react";
-import s from "./Header.module.scss";
 import clsx from "clsx";
+import React from "react";
 import { LuLogIn } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import s from "./Header.module.scss";
 
 export const Header = () => {
   return (

@@ -1,15 +1,12 @@
 .home_container {
-  // overflow: hidden !important;
-  // height: 100vh;
-  // max-height: 100vh;
-    max-height: 100%;
-    overflow: hidden auto;
+  width: 100%;
+  height: 100vh;
+  max-height: 100%;
 }
 
 .home_header {
   display: flex;
   flex-flow: column;
-  // justify-content: center;
 
   justify-content: end;
   padding: 0 200px;
@@ -68,6 +65,7 @@
 }
 
 .figure {
+  overflow-x: hidden;
   &::before {
     content: "";
     left: 0;
@@ -100,6 +98,8 @@
 }
 
 .figure2 {
+  overflow: hidden;
+
   &::before {
     content: "";
     left: -100px;
