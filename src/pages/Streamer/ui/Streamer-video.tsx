@@ -1,30 +1,48 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import s from "../Streamer.module.scss";
 import { getVideosByUserId } from "@/shared/api/axios";
-import { TwitchVideo } from "@/shared/api/types";
+import { useIntersection } from "@mantine/hooks";
 
 export const StreamerVideos = () => {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [videoId, setVideoId] = React.useState<number | null>();
 
-  const fetchVideos = async ({ pageParam = null }: { pageParam?: string }) => {
+  const fetchVideos = async ({
+    pageParam = null,
+  }: {
+    pageParam?: string | null;
+  }) => {
     const result = await getVideosByUserId(id, pageParam);
     return result;
   };
-
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
-    { videos: TwitchVideo[]; nextCursor: string | null },
-    Error
-  >({
-    queryKey: ["getVideosByUserId", id],
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isLoading,
+    isFetchingNextPage,
+    isRefetching,
+    isFetchedAfterMount,
+    isPending,
+  } = useInfiniteQuery({
+    queryKey: ["getVideosByUserId"],
     queryFn: fetchVideos,
     getNextPageParam: (lastPage) => lastPage.nextCursor || null,
-    
+    initialPageParam: undefined,
   });
+
+  // console.log(data, "dfsdfsfsfsfsdfs");
+  // console.log(isFetching,'FETCH')
+  // console.log(isLoading,'LOADING')
+  // console.log(isFetchedAfterMount,'FETCHAFTERMOUNT')
+  // console.log(isFetchingNextPage,'FETCHNEXT')
+  // console.log(isRefetching, "REFETCHING");
+  // console.log(isPending,'PENDING')
 
   const openModal = (id) => {
     setVideoId(id);
@@ -34,12 +52,36 @@ export const StreamerVideos = () => {
     setVideoId(null);
     setIsModalOpen(false);
   };
-  if (!data || data.pages.length === 0) {
+
+  const lastVideoRef = useRef(null);
+  const { ref, entry } = useIntersection({
+    root: lastVideoRef.current,
+    threshold: 1,
+  });
+  useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage) {
+      // if ( - old === 16) {
+      fetchNextPage();
+      console.log("fetcj");
+      // }
+    }
+  }, [entry]);
+  if (isFetching) {
+    return (
+      <div className={s.loading}>
+        <div className={s.ldio}>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data || data?.pages?.length === 0) {
     return <div>У пользователя нет видео.</div>;
   }
 
-  const videos = data.pages.flatMap((page) => page.videos);
-
+  const videos = data?.pages.flatMap((page) => page.videos);
   return (
     <section className={s.streamer_video}>
       <div className={s.noise}></div>
@@ -48,6 +90,7 @@ export const StreamerVideos = () => {
       <div className={s.video_grid}>
         {videos?.map((video) => (
           <div
+            ref={ref}
             key={video.id}
             onClick={() => openModal(video.id)}
             className={s.vod_container}

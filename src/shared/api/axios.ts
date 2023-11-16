@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import axios, { AxiosResponse } from "axios";
 import {
   AccessTokenResponse,

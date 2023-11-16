@@ -11,6 +11,7 @@
     "scss": "stylelint **/*.scss --fix"
   },
   "dependencies": {
+    "@mantine/hooks": "^7.2.2",
     "@tanstack/react-query": "^5.8.2",
     "@types/node": "^20.9.0",
     "axios": "^1.6.1",
@@ -18,6 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-intersection-observer": "^9.5.3",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.18.0",
     "react-twitch-embed": "^3.0.1",
