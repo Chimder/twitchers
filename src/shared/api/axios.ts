@@ -132,6 +132,7 @@ export async function getVideosByUserId(
   userId: string,
   cursor: string | null = null
 ): Promise<{ videos: TwitchVideo[]; nextCursor: string | null }> {
+
   const accessToken = await getAccessToken();
 
   try {

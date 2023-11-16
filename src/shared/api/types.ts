@@ -78,16 +78,16 @@ export interface TwitchUser {
   description: string;
 }
 
-// export interface TwitchVideo {
-//   id: string;
-//   user_id: string;
-//   title: string;
-//   thumbnail_url: string;
-//   duration: string;
-//   view_count: number;
-//   language: string;
-//   user_login: string;
-// }
+export interface TwitchVideo {
+  id: string;
+  user_id: string;
+  title: string;
+  thumbnail_url: string;
+  duration: string;
+  view_count: number;
+  language: string;
+  user_login: string;
+}
 export interface TwitchUserResponse {
   data: TwitchUser[];
 }
