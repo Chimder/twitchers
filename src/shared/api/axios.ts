@@ -4,9 +4,14 @@ import {
   AccessTokenResponse,
   Channel,
   SearchChannelsResponse,
+  TwitchUser,
+  TwitchUserResponse,
+  TwitchVideo,
+  TwitchVideoResponse,
   User,
   Video,
 } from "./types";
+import { InfiniteData } from "@tanstack/react-query";
 
 const clientId = import.meta.env.VITE_CLIENT_ID;
 let accessToken: string | null = null;
@@ -73,41 +78,6 @@ export async function searchChannels(searchQuery: string): Promise<Channel[]> {
   }
 }
 
-export async function getUserAndVideosById(
-  userId: string
-): Promise<{ user: User; videos: Video[] }> {
-  const accessToken = await getAccessToken();
-  try {
-    const userResponse = await axios.get("https://api.twitch.tv/helix/users", {
-      params: {
-        id: userId,
-      },
-      headers: {
-        "Client-ID": clientId,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const videosResponse = await axios.get(
-      "https://api.twitch.tv/helix/videos",
-      {
-        params: {
-          user_id: userId,
-        },
-        headers: {
-          "Client-ID": clientId,
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    const user = userResponse.data.data[0];
-    const videos = videosResponse.data.data;
-
-    return { user, videos };
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export async function getCurrentStreamByUserId(
   userId: string
 ): Promise<any | null> {
@@ -130,6 +100,63 @@ export async function getCurrentStreamByUserId(
       "Ошибка при выполнении запроса к Twitch API:",
       error.response?.data || error.message
     );
+    throw error;
+  }
+}
+
+export async function getUserById(userId: string): Promise<TwitchUser> {
+  const accessToken = await getAccessToken();
+
+  try {
+    const response = await axios.get<TwitchUserResponse>(
+      "https://api.twitch.tv/helix/users",
+      {
+        params: {
+          id: userId,
+        },
+        headers: {
+          "Client-ID": clientId,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const user = response.data.data[0];
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getVideosByUserId(
+  userId: string,
+  cursor: string | null = null
+): Promise<{ videos: TwitchVideo[]; nextCursor: string | null }> {
+  const accessToken = await getAccessToken();
+
+  try {
+    const response = await axios.get<TwitchVideoResponse>(
+      "https://api.twitch.tv/helix/videos",
+      {
+        params: {
+          user_id: userId,
+          first: 20,
+          after: cursor,
+        },
+        headers: {
+          "Client-ID": clientId,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const videos = response.data.data;
+    const nextCursor = response.data.pagination.cursor;
+
+    return { videos, nextCursor };
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 }

@@ -1,20 +1,87 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
+  margin: 0;
+  padding: 0;
   overflow-x: hidden !important;
 }
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   line-height: 18px;
-  overflow-x: hidden !important;
-  position: relative;
-  width: 100%;
-  // background: var(--c-background);
-  max-width: 100%;
-
+  margin: 0;
+  padding: 0;
   background: linear-gradient(to bottom, transparent, rgb(0, 0, 0)) rgb(0, 0, 0);
   transition: ease 0.2s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
+
+ol,
+ul,
+menu,
+summary {
+  list-style: none;
+}
+
+// img {
+//   max-inline-size: 100%;
+//   max-block-size: 100%;
+// }
+
+// input,
+// textarea {
+//   -webkit-user-select: auto;
+// }
+
+// textarea {
+//   white-space: revert;
+// }
+
+// meter {
+//   -webkit-appearance: revert;
+//   appearance: revert;
+// }
+
+// :where(pre) {
+//   all: revert;
+//   box-sizing: border-box;
+// }
+
+// ::placeholder {
+//   color: unset;
+// }
+
+// :where([hidden]) {
+//   display: none;
+// }
+
+// :where([contenteditable]:not([contenteditable="false"])) {
+//   -moz-user-modify: read-write;
+//   -webkit-user-modify: read-write;
+//   overflow-wrap: break-word;
+//   -webkit-line-break: after-white-space;
+//   -webkit-user-select: auto;
+// }
+
+// :where([draggable="true"]) {
+//   -webkit-user-drag: element;
+// }
+
+// /* Revert Modal native behavior */
+// :where(dialog:modal) {
+//   all: revert;
+//   box-sizing: border-box;
+// }

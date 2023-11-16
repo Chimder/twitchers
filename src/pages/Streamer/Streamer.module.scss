@@ -1,9 +1,8 @@
 .streamer_container {
   color: var(--c-primary);
   width: 100%;
+  height: 100%;
   position: relative;
-  isolation: isolate;
-  overflow-x: hidden;
   padding: 0 100px;
 }
 
@@ -104,8 +103,17 @@
   max-width: 1200px;
 }
 
+.noise {
+  z-index: -40;
+  position: absolute;
+  inset: 0;
+  background-image: url(/src/shared/assets/noise.webp);
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
 .figure1 {
-  // overflow-x: hidden;
   -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 0.8), transparent 70%);
   opacity: 0.85;
   background-image: linear-gradient(

@@ -1,13 +1,13 @@
 .home_container {
   width: 100%;
-  height: 100vh;
-  max-height: 100%;
+  height: 100%;
+  overflow: hidden;
+  // position: relative;
 }
 
 .home_header {
   display: flex;
   flex-flow: column;
-
   justify-content: end;
   padding: 0 200px;
   align-items: center;
@@ -28,7 +28,8 @@
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.0415625em;
-    padding-bottom: 40px;
+    margin: 0;
+    // padding-bottom: 40px;
   }
   p {
     display: flex;
@@ -64,73 +65,15 @@
   }
 }
 
-.figure {
-  overflow-x: hidden;
-  &::before {
-    content: "";
-    left: 0;
-    bottom: -10px;
-    position: absolute;
-    filter: blur(55px);
-    transform: translateZ(0);
-    background: linear-gradient(
-      to bottom left,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(219, 10, 10, 0.329)
-    );
-    border-radius: 90%;
-    width: 480px;
-    height: 360px;
-  }
-  &::after {
-    content: "";
-    right: -200px;
-    bottom: 10px;
-    position: absolute;
-    filter: blur(45px);
-    transform: translateZ(0);
-    background: radial-gradient(rgba(1, 247, 255, 0.4), rgba(249, 250, 250, 0));
-    width: 340px;
-    height: 240px;
-    z-index: -1;
-  }
+.noise {
+  z-index: -20;
+  position: absolute;
+  inset: 0;
+  background-image: url(/src/shared/assets/noise.webp);
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }
-
-.figure2 {
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    left: -100px;
-    top: 100px;
-    position: absolute;
-    filter: blur(15px);
-    transform: translateZ(0);
-    background: radial-gradient(
-      // to bottom right,
-      // rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(170, 155, 24, 0.329)
-    );
-    border-radius: 90%;
-    width: 480px;
-    height: 360px;
-  }
-  &::after {
-    content: "";
-    right: -200px;
-    bottom: 10px;
-    position: absolute;
-    filter: blur(45px);
-    transform: translateZ(0);
-    background: radial-gradient(rgba(1, 247, 255, 0.4), rgba(249, 250, 250, 0));
-    width: 340px;
-    height: 240px;
-    z-index: -1;
-  }
-}
-
 .figure3 {
   -webkit-mask-image: radial-gradient(rgba(0, 0, 0, 0.8), transparent 70%);
   opacity: 0.85;

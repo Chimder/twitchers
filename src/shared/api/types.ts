@@ -68,3 +68,33 @@ export interface Video {
   view_count: string;
   viewable: string;
 }
+
+export interface TwitchUser {
+  id: string;
+  login: string;
+  display_name: string;
+  profile_image_url: string;
+  created_at: string;
+  description: string;
+}
+
+export interface TwitchVideo {
+  id: string;
+  user_id: string;
+  title: string;
+  thumbnail_url: string;
+  duration: string;
+  view_count: number;
+  language: string;
+  user_login: string;
+}
+export interface TwitchUserResponse {
+  data: TwitchUser[];
+}
+
+export interface TwitchVideoResponse {
+  data: TwitchVideo[];
+  pagination: {
+    cursor: string;
+  };
+}

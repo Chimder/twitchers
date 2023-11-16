@@ -1,16 +1,30 @@
 import React from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { useParams } from "react-router-dom";
 import s from "../Streamer.module.scss";
-import { User, Video } from "@/shared/api/types";
+import { getVideosByUserId } from "@/shared/api/axios";
+import { TwitchVideo } from "@/shared/api/types";
 
-interface UserProps {
-  user: User;
-  videos: Video[];
-}
-
-export const StreamerVideos = ({ ...user }: UserProps) => {
+export const StreamerVideos = () => {
+  const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [videoId, setVideoId] = React.useState<number | null>();
+
+  const fetchVideos = async ({ pageParam = null }: { pageParam?: string }) => {
+    const result = await getVideosByUserId(id, pageParam);
+    return result;
+  };
+
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
+    { videos: TwitchVideo[]; nextCursor: string | null },
+    Error
+  >({
+    queryKey: ["getVideosByUserId", id],
+    queryFn: fetchVideos,
+    getNextPageParam: (lastPage) => lastPage.nextCursor || null,
+    
+  });
 
   const openModal = (id) => {
     setVideoId(id);
@@ -20,16 +34,19 @@ export const StreamerVideos = ({ ...user }: UserProps) => {
     setVideoId(null);
     setIsModalOpen(false);
   };
-  if (!user.videos || user.videos.length === 0) {
+  if (!data || data.pages.length === 0) {
     return <div>У пользователя нет видео.</div>;
   }
 
+  const videos = data.pages.flatMap((page) => page.videos);
+
   return (
     <section className={s.streamer_video}>
+      <div className={s.noise}></div>
       <div className={s.figure1}></div>
       <div className={s.figure2}></div>
       <div className={s.video_grid}>
-        {user.videos?.map((video) => (
+        {videos?.map((video) => (
           <div
             key={video.id}
             onClick={() => openModal(video.id)}
@@ -70,6 +87,11 @@ export const StreamerVideos = ({ ...user }: UserProps) => {
           </div>
         ))}
       </div>
+      {hasNextPage && (
+        <button onClick={() => fetchNextPage()}>
+          Получить следующие 20 видео
+        </button>
+      )}
       {isModalOpen && (
         <div className={s.modal_overlay}>
           <div className={s.modal_content}>

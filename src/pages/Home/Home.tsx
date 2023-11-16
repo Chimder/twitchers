@@ -22,8 +22,7 @@ export const Home = () => {
 
   return (
     <article className={s.home_container}>
-      {/* <div className={s.figure}></div> */}
-      {/* <div className={s.figure2}></div> */}
+      <div className={s.noise}></div>
       <div className={s.figure3}></div>
       <div className={s.figure4}></div>
       <header className={s.home_header}>
