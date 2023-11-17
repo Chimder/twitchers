@@ -14,6 +14,7 @@ export const Home = () => {
     enabled: !!searchQuery,
   });
 
+  console.log(searchResults);
   React.useEffect(() => {
     if (searchQuery) {
       refetch();

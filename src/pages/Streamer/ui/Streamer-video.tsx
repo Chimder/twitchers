@@ -19,19 +19,13 @@ export const StreamerVideos = () => {
     const result = await getVideosByUserId(id, pageParam);
     return result;
   };
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["getVideosByUserId"],
-    queryFn: fetchVideos,
-    getNextPageParam: (lastPage) => lastPage.nextCursor || null,
-    initialPageParam: undefined,
-  });
-
-  // console.log(isFetching, "FETCH");
-  // console.log(isLoading,'LOADING')
-  // console.log(isFetchedAfterMount,'FETCHAFTERMOUNT')
-  // console.log(isFetchingNextPage,'FETCHNEXT')
-  // console.log(isRefetching, "REFETCHING");
-  // console.log(isPending,'PENDING')
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ["getVideosByUserId"],
+      queryFn: fetchVideos,
+      getNextPageParam: (lastPage) => lastPage.nextCursor || null,
+      initialPageParam: undefined,
+    });
 
   const openModal = (id) => {
     setVideoId(id);
@@ -55,6 +49,17 @@ export const StreamerVideos = () => {
       // }
     }
   }, [entry]);
+
+  if (isFetching && !isFetchingNextPage) {
+    return (
+      <div className={s.loading}>
+        <div className={s.ldio}>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
+  }
 
   if (!data || data?.pages?.length === 0) {
     return <div>У пользователя нет видео.</div>;

@@ -11,27 +11,17 @@ export const StreamerInfo = () => {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const { data: user, isFetching: isFetchingUser } = useQuery({
-    queryKey: ["getUser", id],
+    queryKey: ["getUser"],
     queryFn: async () => getUserById(id),
     refetchOnWindowFocus: false,
   });
 
   const { data: currentStream, isFetching: isFetchingStream } = useQuery({
-    queryKey: ["getCurrentStream", id],
+    queryKey: ["getCurrentStream"],
     queryFn: async () => getCurrentStreamByUserId(id),
     refetchOnWindowFocus: false,
   });
 
-  if (isFetchingStream && isFetchingUser) {
-    return (
-      <div className={s.loading}>
-        <div className={s.ldio}>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    );
-  }
   return (
     <>
       <section className={s.streamer}>
