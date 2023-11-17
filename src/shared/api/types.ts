@@ -69,15 +69,6 @@ export interface Video {
   viewable: string;
 }
 
-export interface TwitchUser {
-  id: string;
-  login: string;
-  display_name: string;
-  profile_image_url: string;
-  created_at: string;
-  description: string;
-}
-
 export interface TwitchVideo {
   id: string;
   user_id: string;
@@ -97,4 +88,33 @@ export interface TwitchVideoResponse {
   pagination: {
     cursor: string;
   };
+}
+export interface TwitchUser {
+  id: string;
+  login: string;
+  display_name: string;
+  profile_image_url: string;
+  created_at: string;
+  description: string;
+}
+
+export interface TwitchUserResponse {
+  data: TwitchUser[];
+}
+
+export interface TwitchStream {
+  id: string;
+  user_id: string;
+  user_name: string;
+  game_id: string;
+  type: string;
+  title: string;
+  viewer_count: number;
+  started_at: string;
+  language: string;
+  thumbnail_url: string;
+}
+
+export interface TwitchStreamResponse {
+  data: TwitchStream[];
 }

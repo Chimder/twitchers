@@ -5,7 +5,7 @@ import { StreamerVideos } from "./ui/Streamer-video";
 export const Streamer = () => {
   return (
     <article className={s.streamer_container}>
-      {/* <StreamerInfo /> */}
+      <StreamerInfo />
       <StreamerVideos />
     </article>
   );

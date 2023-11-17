@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
+import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import s from "../Streamer.module.scss";
 import { getVideosByUserId } from "@/shared/api/axios";
-import { useIntersection } from "@mantine/hooks";
 
 export const StreamerVideos = () => {
   const { id } = useParams();
@@ -19,25 +19,14 @@ export const StreamerVideos = () => {
     const result = await getVideosByUserId(id, pageParam);
     return result;
   };
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isLoading,
-    isFetchingNextPage,
-    isRefetching,
-    isFetchedAfterMount,
-    isPending,
-  } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["getVideosByUserId"],
     queryFn: fetchVideos,
     getNextPageParam: (lastPage) => lastPage.nextCursor || null,
     initialPageParam: undefined,
   });
 
-  // console.log(data, "dfsdfsfsfsfsdfs");
-  // console.log(isFetching,'FETCH')
+  // console.log(isFetching, "FETCH");
   // console.log(isLoading,'LOADING')
   // console.log(isFetchedAfterMount,'FETCHAFTERMOUNT')
   // console.log(isFetchingNextPage,'FETCHNEXT')
@@ -66,16 +55,6 @@ export const StreamerVideos = () => {
       // }
     }
   }, [entry]);
-  if (isFetching) {
-    return (
-      <div className={s.loading}>
-        <div className={s.ldio}>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    );
-  }
 
   if (!data || data?.pages?.length === 0) {
     return <div>У пользователя нет видео.</div>;
@@ -130,11 +109,6 @@ export const StreamerVideos = () => {
           </div>
         ))}
       </div>
-      {hasNextPage && (
-        <button onClick={() => fetchNextPage()}>
-          Получить следующие 20 видео
-        </button>
-      )}
       {isModalOpen && (
         <div className={s.modal_overlay}>
           <div className={s.modal_content}>

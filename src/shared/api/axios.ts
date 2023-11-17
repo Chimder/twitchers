@@ -3,6 +3,8 @@ import {
   AccessTokenResponse,
   Channel,
   SearchChannelsResponse,
+  TwitchStream,
+  TwitchStreamResponse,
   TwitchUser,
   TwitchUserResponse,
   TwitchVideo,
@@ -10,7 +12,6 @@ import {
   User,
   Video,
 } from "./types";
-import { InfiniteData } from "@tanstack/react-query";
 
 const clientId = import.meta.env.VITE_CLIENT_ID;
 let accessToken: string | null = null;
@@ -77,33 +78,7 @@ export async function searchChannels(searchQuery: string): Promise<Channel[]> {
   }
 }
 
-export async function getCurrentStreamByUserId(
-  userId: string
-): Promise<any | null> {
-  const accessToken = await getAccessToken();
-  try {
-    const response = await axios.get("https://api.twitch.tv/helix/streams", {
-      params: {
-        user_id: userId,
-      },
-      headers: {
-        "Client-ID": clientId,
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const stream = response.data.data[0];
-    return stream || null;
-  } catch (error) {
-    console.error(
-      "Ошибка при выполнении запроса к Twitch API:",
-      error.response?.data || error.message
-    );
-    throw error;
-  }
-}
-
-export async function getUserById(userId: string): Promise<TwitchUser> {
+export async function getUserById(userId: string): Promise<TwitchUser | null> {
   const accessToken = await getAccessToken();
 
   try {
@@ -121,9 +96,39 @@ export async function getUserById(userId: string): Promise<TwitchUser> {
     );
 
     const user = response.data.data[0];
-    return user;
+    return user || null;
   } catch (error) {
     console.error(error);
+    throw error;
+  }
+}
+
+export async function getCurrentStreamByUserId(
+  userId: string
+): Promise<TwitchStream | null> {
+  const accessToken = await getAccessToken();
+
+  try {
+    const response = await axios.get<TwitchStreamResponse>(
+      "https://api.twitch.tv/helix/streams",
+      {
+        params: {
+          user_id: userId,
+        },
+        headers: {
+          "Client-ID": clientId,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const stream = response.data.data[0];
+    return stream || null;
+  } catch (error) {
+    console.error(
+      "Ошибка при выполнении запроса к Twitch API:",
+      error.response?.data || error.message
+    );
     throw error;
   }
 }
@@ -132,7 +137,6 @@ export async function getVideosByUserId(
   userId: string,
   cursor: string | null = null
 ): Promise<{ videos: TwitchVideo[]; nextCursor: string | null }> {
-
   const accessToken = await getAccessToken();
 
   try {
