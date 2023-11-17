@@ -21,6 +21,7 @@ export async function getAccessToken(): Promise<string> {
   if (accessToken && tokenExpirationTime && Date.now() < tokenExpirationTime) {
     return accessToken;
   }
+
   try {
     const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
     const response: AxiosResponse<AccessTokenResponse> = await axios.post(
@@ -38,8 +39,12 @@ export async function getAccessToken(): Promise<string> {
     accessToken = response.data.access_token;
     tokenExpirationTime = Date.now() + response.data.expires_in * 1000;
 
-    console.log(response.data, "token");
-    console.log(tokenExpirationTime, "Toitressfs");
+    // Сохранение токена и времени его истечения в sessionStorage
+    sessionStorage.setItem("accessToken", accessToken);
+    sessionStorage.setItem(
+      "tokenExpirationTime",
+      tokenExpirationTime.toString()
+    );
 
     return accessToken;
   } catch (error) {

@@ -1,25 +1,26 @@
-import React from "react";
-import s from "./Home.module.scss";
+import React, { useEffect, useState } from "react";
+import { useDebouncedValue } from "@mantine/hooks";
 import { useQuery } from "@tanstack/react-query";
-import { searchChannels } from "@/shared/api/axios";
 import { GoDotFill } from "react-icons/go";
 import { Link } from "react-router-dom";
+import s from "./Home.module.scss";
+import { searchChannels } from "@/shared/api/axios";
 
 export const Home = () => {
-  const [searchQuery, setSearchQuery] = React.useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [debouncedSearchQuery] = useDebouncedValue(searchQuery, 300);
 
   const { data: searchResults, refetch } = useQuery({
-    queryKey: ["searchResults"],
-    queryFn: async () => searchChannels(searchQuery),
-    enabled: !!searchQuery,
+    queryKey: ["searchResults", debouncedSearchQuery],
+    queryFn: async () => searchChannels(debouncedSearchQuery),
+    enabled: !!debouncedSearchQuery,
   });
 
-  console.log(searchResults);
-  React.useEffect(() => {
-    if (searchQuery) {
+  useEffect(() => {
+    if (debouncedSearchQuery) {
       refetch();
     }
-  }, [searchQuery, refetch]);
+  }, [debouncedSearchQuery, refetch]);
 
   return (
     <article className={s.home_container}>
