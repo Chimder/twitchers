@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { UpWhenReload } from "@/components/UpWhenReload";
 import { Home } from "@/pages/Home/Home";
 import { Layout } from "@/pages/Layout";
@@ -11,9 +11,10 @@ export const App = () => {
       <UpWhenReload />
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route index element={<Home />}></Route>
           <Route path='streamer/:id' element={<Streamer />}></Route>
+          <Route index element={<Home />}></Route>
         </Route>
+        <Route path='*' element={<Navigate to='/' replace />}></Route>
       </Routes>
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TwitchPlayer } from "react-twitch-embed";
 import s from "../Streamer.module.scss";
 import { getCurrentStreamByUserId, getUserById } from "@/shared/api/axios";
@@ -9,6 +9,7 @@ import { HiOutlineStatusOffline } from "react-icons/hi";
 export const StreamerInfo = () => {
   const { id } = useParams();
 
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const { data: user, isFetching: isFetchingUser } = useQuery({
     queryKey: ["getUser"],
@@ -22,6 +23,10 @@ export const StreamerInfo = () => {
     refetchOnWindowFocus: false,
   });
 
+  if (!user && !isFetchingUser && !isFetchingStream) {
+    sessionStorage.setItem("userNotFound", "true");
+    navigate("/");
+  }
   return (
     <>
       <section className={s.streamer}>
@@ -29,21 +34,21 @@ export const StreamerInfo = () => {
           <img src={user?.profile_image_url} alt='' />
           <div className={s.streamer_name}>{user?.display_name}</div>
         </div>
-        <div className={s.streamer_info}>
+        {/* <div className={s.streamer_info}>
           <div className={s.streamer_info_container}>
             <div className={s.streamer_joined}>
               <span>Joined</span>
               <span>
-                {/* {new Date(user?.created_at).toISOString().split("T")[0]} */}
+                {new Date(user?.created_at).toISOString().split("T")[0]}
               </span>
             </div>
             <div className={s.streamer_joined}>
               <span>Language</span>
-              {/* <span>{user.videos[0]?.language.toUpperCase() || ""}</span> */}
+              <span>{user.videos[0]?.language.toUpperCase() || ""}</span>
             </div>
             <div className={s.streamer_description}>{user?.description}</div>
           </div>
-        </div>
+        </div> */}
         <div
           className={s.twitch_player}
           onClick={() => setIsModalOpen(!isModalOpen)}

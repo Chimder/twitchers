@@ -5,6 +5,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import s from "../Streamer.module.scss";
 import { getVideosByUserId } from "@/shared/api/axios";
+import { FaSpinner } from "react-icons/fa";
 
 export const StreamerVideos = () => {
   const { id } = useParams();
@@ -113,6 +114,11 @@ export const StreamerVideos = () => {
             </div>
           </div>
         ))}
+        {isFetchingNextPage && (
+          <div className={s.loader}>
+            <FaSpinner className={s.spinner} />
+          </div>
+        )}
       </div>
       {isModalOpen && (
         <div className={s.modal_overlay}>
