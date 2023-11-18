@@ -9,10 +9,16 @@
   display: flex;
   flex-flow: column;
   justify-content: end;
-  padding: 0 200px;
+  padding: 0 100px;
   align-items: center;
-  height: 480px;
+  // height: 100px;
+  // height: 480px;
+
   background: var(--c-primary);
+  @media (width <= 768px) {
+    // height: 200px;
+    padding: 0 50px;
+  }
 }
 
 .main_h1 {
@@ -24,7 +30,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    font-size: 7.4rem;
+    font-size: clamp(25px, 8vw, 100px);
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -0.0415625em;
@@ -35,7 +41,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: clamp(12px, 2vw, 100px);
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: -0.0415625em;
@@ -88,11 +94,12 @@
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  width: max(25vw, 100px);
+  width: min(50vw, 400px);
   position: absolute;
-  height: 400px;
-  bottom: -100px;
-  left: -200px;
+  height: min(40vw, 400px);
+  // height: 400px;
+  top: min(60vw, 400px);
+  left: -90px;
   z-index: -30;
 }
 
@@ -106,11 +113,13 @@
     rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   position: absolute;
-  width: 600px;
-  height: 600px;
+  // width: 600px;
+  // height: 600px;
+  width: min(50vw, 600px);
+  height: min(50vw, 600px);
   bottom: -200px;
-  top: 300px;
-  right: -300px;
+  top: min(40vw, 300px);
+  right: -100px;
   z-index: -30;
 }
 
@@ -216,7 +225,6 @@
     height: 70px;
   }
 }
-.alert_message{
-
+.alert_message {
   width: 40%;
 }
