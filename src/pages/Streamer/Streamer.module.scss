@@ -13,7 +13,7 @@
 }
 .streamer {
   width: 100%;
-  padding: 40px 0 60px 0;
+  padding: 40px 10px 60px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,15 +53,6 @@
   }
 }
 
-.ldio div {
-  position: absolute;
-  border-width: 4px;
-  border-style: solid;
-  opacity: 1;
-  border-radius: 50%;
-  animation: ldio 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-
 .ldio div:nth-child(1) {
   border-color: var(--c-primary);
   animation-delay: 0s;
@@ -72,16 +63,35 @@
   animation-delay: -0.5s;
 }
 
+.ldio div {
+  position: absolute;
+  border-width: 4px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  animation: ldio 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
 .loading {
   display: flex;
   position: absolute;
-  top: 42%;
-  right: 44%;
+  right: 42%;
   width: 200px;
   height: 200px;
   display: inline-block;
   overflow: hidden;
-  // background: #ffffff; /* Белый фон */
+  @media (max-width: 1000px) {
+    right: 38%;
+  }
+  @media (max-width: 768px) {
+    right: 34%;
+  }
+  @media (max-width: 500px) {
+    right: 29%;
+  }
+  @media (max-width: 414px) {
+    right: 26%;
+  }
 }
 
 .ldio {
@@ -309,7 +319,7 @@
   display: flex;
   flex-flow: column;
   align-items: self-start;
-  padding-right: 60px;
+  padding-right: 56px;
   div {
     padding-top: 80px;
     font-size: clamp(2rem, 6vw, 80px);
@@ -318,6 +328,9 @@
     border: 2px solid var(--c-secondary);
     width: 200px;
     height: 200px;
+  }
+  @media (max-width: 1000px) {
+    padding-right: 18px;
   }
   @media (max-width: 700px) {
     padding: 0;
@@ -360,27 +373,57 @@
 }
 
 .twitch_player {
-  width: 503px;
   border: 2px solid var(--c-secondary);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 363px;
+  width: clamp(380px, 54vw, 503px);
+  height: clamp(230px, 42vw, 363px);
   cursor: pointer;
   @media (max-width: 700px) {
     width: 82vw;
-    height: 28vh;
+    height: 30vh;
+    border: 0;
   }
 }
 .twitch_player2 {
-  width: 503px;
+  width: clamp(380px, 54vw, 503px);
+  height: clamp(230px, 42vw, 363px);
   cursor: pointer;
   border: 2px solid var(--c-secondary);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 363px;
   z-index: -1;
+  @media (max-width: 700px) {
+    width: 82vw;
+    height: 30vh;
+    border: 0;
+    z-index: 10;
+  }
+}
+.twitch_player_main {
+  width: clamp(380px, 54vw, 503px) !important;
+  height: clamp(230px, 42vw, 363px) !important;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  @media (max-width: 700px) {
+    width: 82vw !important;
+    height: 30vh !important;
+    border: 0;
+    z-index: 10;
+  }
+}
+.twitch_player_main_2 {
+  width: clamp(300px, 72vw, 1500px) !important;
+  height: clamp(120px, 41vw, 800px) !important;
+  @media (max-width: 700px) {
+    width: 82vw !important;
+    height: 30vh !important;
+  }
 }
 
 .modal_overlay {
@@ -400,8 +443,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1500px;
-  height: 800px;
+  width: clamp(300px, 72vw, 1500px);
+  height: clamp(120px, 41vw, 800px);
   background: rgba(0, 0, 0, 0.8);
   padding: 20px;
   position: relative;
@@ -421,6 +464,8 @@
 
 .twitch_iframe {
   border: 1px solid black;
+  width: clamp(300px, 70vw, 1500px);
+  height: clamp(120px, 40vw, 800px);
 }
 
 .twitch_offline {

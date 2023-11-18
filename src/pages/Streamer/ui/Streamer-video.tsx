@@ -127,8 +127,8 @@ export const StreamerVideos = () => {
             <iframe
               className={s.twitch_iframe}
               src={`https://player.twitch.tv/?video=v${videoId}&parent=localhost&parent=twitchers.vercel.app&autoplay=false`}
-              width='1280'
-              height='720'
+              // width='1280'
+              // height='720'
               allowFullScreen
             ></iframe>
           </div>

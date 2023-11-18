@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import { HiOutlineStatusOffline } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router-dom";
 import { TwitchPlayer } from "react-twitch-embed";
 import s from "../Streamer.module.scss";
 import { getCurrentStreamByUserId, getUserById } from "@/shared/api/axios";
-import { HiOutlineStatusOffline } from "react-icons/hi";
 
 export const StreamerInfo = () => {
   const { id } = useParams();
@@ -34,21 +34,6 @@ export const StreamerInfo = () => {
           <img src={user?.profile_image_url} alt='' />
           <div className={s.streamer_name}>{user?.display_name}</div>
         </div>
-        {/* <div className={s.streamer_info}>
-          <div className={s.streamer_info_container}>
-            <div className={s.streamer_joined}>
-              <span>Joined</span>
-              <span>
-                {new Date(user?.created_at).toISOString().split("T")[0]}
-              </span>
-            </div>
-            <div className={s.streamer_joined}>
-              <span>Language</span>
-              <span>{user.videos[0]?.language.toUpperCase() || ""}</span>
-            </div>
-            <div className={s.streamer_description}>{user?.description}</div>
-          </div>
-        </div> */}
         <div
           className={s.twitch_player}
           onClick={() => setIsModalOpen(!isModalOpen)}
@@ -56,9 +41,8 @@ export const StreamerInfo = () => {
           {currentStream && !isModalOpen ? (
             <div className={s.twitch_player2}>
               <TwitchPlayer
+                className={s.twitch_player_main}
                 channel={user?.display_name}
-                width={500}
-                height={360}
                 parent={["localhost", "twitchers.vercel.app"]}
               />
             </div>
@@ -76,9 +60,10 @@ export const StreamerInfo = () => {
             ></div>
             {currentStream && (
               <TwitchPlayer
+                className={s.twitch_player_main_2}
                 channel={user?.display_name}
-                width={1200}
-                height={700}
+                // width={1200}
+                // height={700}
                 parent={["localhost", "twitchers.vercel.app"]}
               />
             )}
