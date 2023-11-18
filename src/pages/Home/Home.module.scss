@@ -3,6 +3,10 @@
   height: 100%;
   overflow: hidden;
   // position: relative;
+  @media (min-width: 768px) {
+    // height: 200px;
+    padding: 0 50px;
+  }
 }
 
 .home_header {
