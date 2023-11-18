@@ -6,9 +6,9 @@
   display: flex;
   height: 100px;
   min-height: 70px;
-  @media (min-width: 579px) {
-    width: 100%;
-    min-width: 414px;
+  @media (max-width: 579px) {
+    // width: 100%;
+    // min-width: 414px;
   }
 }
 
@@ -117,7 +117,7 @@
 .sing_in {
   padding: 0;
 }
-@media only screen and (min-width: 579px) {
+@media only screen and (max-width: 579px) {
   .mobile_toggle {
     display: block;
   }
