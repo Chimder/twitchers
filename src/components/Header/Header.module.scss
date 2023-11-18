@@ -1,13 +1,12 @@
 .header {
-  // width: 100%;
-  width: 100dvw;
+  width: 100%;
   // position: relative;
   padding: 0 50px;
   background: var(--h-primary);
   display: flex;
   height: 100px;
   min-height: 70px;
-  @media (width <= 579px) {
+  @media only screen and (width <= 579px) {
   }
 }
 
