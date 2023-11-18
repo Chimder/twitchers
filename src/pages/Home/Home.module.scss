@@ -55,9 +55,11 @@
 
 .input_container {
   display: flex;
+  width: clamp(100px, 70vw, 480px);
   input {
     display: flex;
-    min-width: 480px;
+    width: clamp(100px, 70vw, 480px);
+    // min-width: 480px;
     color: var(--h-secondary);
     background: var(--input-primary);
     border: 1px solid var(--h-secondary);
@@ -105,6 +107,9 @@
   top: min(60vw, 400px);
   left: -90px;
   z-index: -30;
+  @media (max-width: 576px) {
+    top: 600px;
+  }
 }
 
 .figure4 {
@@ -125,6 +130,10 @@
   top: min(40vw, 300px);
   right: -100px;
   z-index: -30;
+  @media (max-width: 576px) {
+  top: 400px;
+  // bottom: 0px;
+  }
 }
 
 .search_container {
@@ -133,7 +142,8 @@
   color: var(--h-secondary);
 }
 .search {
-  width: 476px;
+  width: clamp(98px, 70vw, 476px);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 @keyframes blink {
@@ -156,7 +166,13 @@
   display: flex;
   align-items: start;
   padding-top: 12px;
+  padding: 12px 0 0 20px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
   img {
     width: 50px;
     border-radius: 99px;
