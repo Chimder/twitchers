@@ -7,7 +7,7 @@
   height: 100px;
   min-height: 70px;
   min-width: 414px;
-  @media only screen and (width <= 579px) {
+  @media only screen and (min-width: 579px) {
   }
 }
 
@@ -116,7 +116,7 @@
 .sing_in {
   padding: 0;
 }
-@media only screen and (width <= 579px) {
+@media only screen and (min-width: 579px) {
   .mobile_toggle {
     display: block;
   }
