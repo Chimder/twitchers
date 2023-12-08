@@ -57,9 +57,9 @@ export const Home = () => {
             Vods
           </h1>
           <p>
-            Watch twitch past broadcasts streams  Start by
+            Watch twitch past broadcasts streams Start by
             <br />
-            Typing twitch username or game title...
+            Typing twitch username...
           </p>
         </div>
         <div className={s.input_container}>
