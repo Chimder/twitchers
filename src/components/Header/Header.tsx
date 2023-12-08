@@ -15,8 +15,9 @@ export const Header = () => {
       <div className={s.container}>
         <div className={s.left}>
           <Link to='/'>
+            LOGO
             <img
-              src='https://cdn.thegameawards.com//frontend/svgs/tga_icon_2023.svg'
+              // src='https://cdn.thegameawards.com//frontend/svgs/tga_icon_2023.svg'
               alt=''
             />
           </Link>
